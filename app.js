@@ -21,6 +21,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+console.log(client.guilds.fetch(989215607734009866))
 
 // Store for in-progress games. In production, you'd want to use a DB
 const game = {};

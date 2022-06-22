@@ -71,13 +71,11 @@ export function penis(req, res) {
 }
 
 export function emojitest(req, res, client) {
-//  console.log(req)
-//  console.log(client.emojis)
-//  console.log(client.guilds)
+  console.log(client.guilds)
   return res.send({
     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
     data: {
-      //content: 'hello world ' + req.ctx.guild.emojis.cache.get("989266835146960897").toString(),
+      content: 'hello world ' + req.ctx.guild.emojis.cache.get("989266835146960897").toString(),
     },
   });
 }
