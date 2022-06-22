@@ -12,6 +12,7 @@ import {
   CHALLENGE_COMMAND,
   TEST_COMMAND,
   PENIS_COMMAND,
+  GLAD_TO_SEE_U_COMMAND,
   HasGuildCommands,
 } from './commands.js';
 
@@ -65,6 +66,14 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
+    if(name === 'glad_to_see_u') {
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: 'Me too'
+        }  
+      });
+    }
   }
 });
 
@@ -76,5 +85,6 @@ app.listen(PORT, () => {
     TEST_COMMAND,
     CHALLENGE_COMMAND,
     PENIS_COMMAND,
+    GLAD_TO_SEE_U_COMMAND,
   ]);
 });
