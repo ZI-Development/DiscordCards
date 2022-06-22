@@ -71,9 +71,9 @@ app.listen(PORT, () => {
 // Check if guild commands from commands.json are installed (if not, install them)
   COMMAND.HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
     COMMAND.TEST,
-    COMMAND.CHALLENGE_COMMAND,
-    COMMAND.PENIS_COMMAND,
-    COMMAND.BLOBS_COMMAND,
-    COMMAND.EMOJITEST_COMMAND,
+    COMMAND.CHALLENGE,
+    COMMAND.PENIS,
+    COMMAND.BLOBS,
+    COMMAND.EMOJITEST,
   ]);
 });
