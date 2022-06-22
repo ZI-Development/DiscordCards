@@ -96,7 +96,7 @@ app.post('/interactions', async function (req, res) {
     if(name === 'penis') {      
       const exampleEmbed = new MessageEmbed()
         .setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/penis.png?v=1655920368058');
-      
+
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
@@ -104,12 +104,14 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
-    if(name === 'glad_to_see_u') {        
+    if(name === 'blobs') {        
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          content: 'Me too',     
-        }        
+          embeds: [
+            new MessageEmbed().setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/Battle%20Blob.png?v=1655926885644'),         
+            new MessageEmbed().setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/Battle%20Blob.png?v=1655926885644')
+        ]}        
       });
     }
   }
