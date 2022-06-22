@@ -16,7 +16,8 @@ import {
   EMOJITEST_COMMAND,
   HasGuildCommands,
 } from './commands.js'; 
-import { MessageEmbed } from 'discord.js';
+import { testHandle } from './handles.js';
+import { MessageEmbed, Client, Intents } from 'discord.js';
 //const { MessageEmbed } = require('discord.js');
 
 // Create an express app
@@ -25,6 +26,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 // Parse request body and verifies incoming requests using discord-interactions package
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
+
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 // Store for in-progress games. In production, you'd want to use a DB
 const activeGames = {};
@@ -52,14 +55,7 @@ app.post('/interactions', async function (req, res) {
 
     // "test" guild command
     if (name === 'test') {
-      // Send a message into the channel where command was triggered from
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          // Fetches a random emoji to send from a helper function
-          content: 'hello world ' + getRandomEmoji(),
-        },
-      });
+      return testHandle(req, res);
     }
     if (name === 'challenge' && id) {
       const userId = req.body.member.user.id;
@@ -106,10 +102,11 @@ app.post('/interactions', async function (req, res) {
       });
     }
     if(name === 'emojitest') {
+      console.log(guild.emojis.cache)
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          content: 'hello world ' + app.emojis.cache.find(emoji => emoji.name === "Mothership").toString(),
+          content: 'hello world ' + client.emojis.cache.find(emoji => emoji.name === "Mothership").toString(),
         },
       });
     }
