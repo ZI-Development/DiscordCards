@@ -59,14 +59,14 @@ function createCommandChoices() {
 }
 
 // Simple test command
-export const TEST_COMMAND = {
+export const TEST = {
   name: 'test',
   description: 'Basic guild command',
   type: 1,
 };
 
 // Command containing options
-export const CHALLENGE_COMMAND = {
+export const CHALLENGE = {
   name: 'challenge',
   description: 'Challenge to a match of rock paper scissors',
   options: [
@@ -81,19 +81,19 @@ export const CHALLENGE_COMMAND = {
   type: 1,
 };
 
-export const PENIS_COMMAND = {
+export const PENIS = {
   name: 'penis',
   description: 'Send a dickpic',
   type: 1,
 };
 
-export const BLOBS_COMMAND = {
+export const BLOBS = {
   name: 'blobs',
   description: 'Send a pack of blobs',
   type:1,  
 };
 
-export const EMOJITEST_COMMAND = {
+export const EMOJITEST = {
   name: 'emojitest',
   description: 'Send emoji',
   type:1,  

@@ -70,12 +70,25 @@ export function penis(req, res) {
       });
 }
 
-export function emojitest(req, res, cl) {
-  console.log(client.guild.emojis.cache)
-      return res.send({
+export function emojitest(req, res, client) {
+  console.log(req)
+  return res.send({
+    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+    data: {
+      content: 'hello world ' + req.ctx.guild.emojis.cache.get("989266835146960897").toString(),
+    },
+  });
+}
+
+export function blobs(req, res, client) {
+  var cards = JSON.parse('../star-realms/cars.js');
+  cards.fir
+  return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          content: 'hello world ' + client.emojis.cache.find(emoji => emoji.name === "Mothership").toString(),
-        },
+          embeds: [
+            new MessageEmbed().setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/Mothership.png?v=1655926882042'),         
+            new MessageEmbed().setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/Battle%20Blob.png?v=1655926885644')
+        ]}        
       });
 }

@@ -8,14 +8,7 @@ import {
 } from 'discord-interactions';
 import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './utils.js';
 import { getShuffledOptions, getResult } from './game.js';
-import {
-  CHALLENGE_COMMAND,
-  TEST_COMMAND,
-  PENIS_COMMAND,
-  BLOBS_COMMAND,
-  EMOJITEST_COMMAND,
-  HasGuildCommands,
-} from './commands.js'; 
+import * as COMMAND from './commands.js'; 
 import * as handle from './handles.js';
 import { MessageEmbed, Client, Intents } from 'discord.js';
 //const { MessageEmbed } = require('discord.js');
@@ -64,17 +57,10 @@ app.post('/interactions', async function (req, res) {
       return handle.penis(req, res);
     }
     if(name === 'emojitest') {
-      return handle.emojitest(req, res);
+      return handle.emojitest(req, res, client);
     }
     if(name === 'blobs') {        
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          embeds: [
-            new MessageEmbed().setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/Mothership.png?v=1655926882042'),         
-            new MessageEmbed().setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/Battle%20Blob.png?v=1655926885644')
-        ]}        
-      });
+      return handle.blobs(req, res);
     }
   }
 });
@@ -82,12 +68,12 @@ app.post('/interactions', async function (req, res) {
 app.listen(PORT, () => {
   console.log('Listening on port', PORT);
 
-  // Check if guild commands from commands.json are installed (if not, install them)
-  HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
-    TEST_COMMAND,
-    CHALLENGE_COMMAND,
-    PENIS_COMMAND,
-    BLOBS_COMMAND,
-    EMOJITEST_COMMAND,
+// Check if guild commands from commands.json are installed (if not, install them)
+  COMMAND.HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
+    COMMAND.TEST,
+    COMMAND.CHALLENGE_COMMAND,
+    COMMAND.PENIS_COMMAND,
+    COMMAND.BLOBS_COMMAND,
+    COMMAND.EMOJITEST_COMMAND,
   ]);
 });
