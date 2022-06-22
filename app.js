@@ -14,8 +14,9 @@ import {
   PENIS_COMMAND,
   GLAD_TO_SEE_U_COMMAND,
   HasGuildCommands,
-} from './commands.js';
-import MessageEmbed from 'discord.js'
+} from './commands.js'; 
+import { MessageEmbed } from 'discord.js';
+//const { MessageEmbed } = require('discord.js');
 
 // Create an express app
 const app = express();
@@ -68,12 +69,15 @@ app.post('/interactions', async function (req, res) {
       });
     }
     if(name === 'glad_to_see_u') {
+        
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
           content: 'Me too',     
-          ephemeral: true
+          ephemeral: true,
+          embeds: [exampleEmbed]
         }
+        
       });
     }
   }
