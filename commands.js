@@ -87,8 +87,8 @@ export const PENIS_COMMAND = {
   type: 1,
 };
 
-export const GLAD_TO_SEE_U_COMMAND = {
-  name: 'glad_to_see_u',
-  description: 'Send a happy dickpic',
+export const BLOBS_COMMAND = {
+  name: 'blobs',
+  description: 'Send a pack of blobs',
   type:1,  
 };

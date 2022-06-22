@@ -12,7 +12,7 @@ import {
   CHALLENGE_COMMAND,
   TEST_COMMAND,
   PENIS_COMMAND,
-  GLAD_TO_SEE_U_COMMAND,
+  BLOBS_COMMAND,
   HasGuildCommands,
 } from './commands.js'; 
 import { MessageEmbed } from 'discord.js';
@@ -108,8 +108,9 @@ app.post('/interactions', async function (req, res) {
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
+          
           embeds: [
-            new MessageEmbed().setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/Battle%20Blob.png?v=1655926885644'),         
+            new MessageEmbed().setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/Mothership.png?v=1655926882042'),         
             new MessageEmbed().setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/Battle%20Blob.png?v=1655926885644')
         ]}        
       });
@@ -125,6 +126,6 @@ app.listen(PORT, () => {
     TEST_COMMAND,
     CHALLENGE_COMMAND,
     PENIS_COMMAND,
-    GLAD_TO_SEE_U_COMMAND,
+    BLOBS_COMMAND,
   ]);
 });
