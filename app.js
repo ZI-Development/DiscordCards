@@ -71,8 +71,12 @@ app.post('/interactions', async function (req, res) {
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
           content: 'Me too',
-          files: []
           
+          
+          attachments: [{
+            type: 'image',
+            url: 'https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/penis.png?v=1655920368058',
+          }],
         }  
       });
     }
