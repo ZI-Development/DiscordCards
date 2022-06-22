@@ -89,7 +89,14 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
-    if(name === 'penis')
+    if(name === 'penis') {
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: '8=====>'  
+        },
+      });
+    }
   }
 
   /**
@@ -181,5 +188,6 @@ app.listen(3000, () => {
   HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
     TEST_COMMAND,
     CHALLENGE_COMMAND,
+    PENIS_COMMAND,
   ]);
 });
