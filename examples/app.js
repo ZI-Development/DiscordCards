@@ -11,6 +11,7 @@ import { getShuffledOptions, getResult } from './game.js';
 import {
   CHALLENGE_COMMAND,
   TEST_COMMAND,
+  PENIS_COMMAND,
   HasGuildCommands,
 } from './commands.js';
 
@@ -88,6 +89,7 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
+    if(name === 'penis')
   }
 
   /**

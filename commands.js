@@ -80,3 +80,14 @@ export const CHALLENGE_COMMAND = {
   ],
   type: 1,
 };
+
+export const PENIS_COMMAND = {
+  name: 'penis',
+  description: 'Send a dickpic',
+  options: [
+    {
+      type: 1
+    },
+  ],
+  type: 1,
+};
