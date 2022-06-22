@@ -13,6 +13,7 @@ import {
   TEST_COMMAND,
   PENIS_COMMAND,
   BLOBS_COMMAND,
+  EMOJITEST_COMMAND,
   HasGuildCommands,
 } from './commands.js'; 
 import { MessageEmbed } from 'discord.js';
@@ -104,11 +105,18 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
+    if(name === 'emojitest') {
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: 'hello world ' + app.emojis.cache.find(emoji => emoji.name === "Mothership").toString(),
+        },
+      });
+    }
     if(name === 'blobs') {        
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          
           embeds: [
             new MessageEmbed().setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/Mothership.png?v=1655926882042'),         
             new MessageEmbed().setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/Battle%20Blob.png?v=1655926885644')
@@ -127,5 +135,6 @@ app.listen(PORT, () => {
     CHALLENGE_COMMAND,
     PENIS_COMMAND,
     BLOBS_COMMAND,
+    EMOJITEST_COMMAND,
   ]);
 });

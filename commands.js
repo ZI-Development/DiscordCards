@@ -92,3 +92,9 @@ export const BLOBS_COMMAND = {
   description: 'Send a pack of blobs',
   type:1,  
 };
+
+export const EMOJITEST_COMMAND = {
+  name: 'emojitest',
+  description: 'Send emoji',
+  type:1,  
+};
