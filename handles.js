@@ -7,7 +7,7 @@ import {
 } from 'discord-interactions';
 import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './utils.js';
 import { MessageEmbed, Client, Intents } from 'discord.js';
-
+import { cards } from './star-realms/cards.js'
 
 export function ping(req, res) {
     return res.send({ type: InteractionResponseType.PONG });
@@ -72,6 +72,8 @@ export function penis(req, res) {
 
 export function emojitest(req, res, client) {
   console.log(req)
+  console.log(client.emojis)
+  console.log(client.guilds)
   return res.send({
     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
     data: {
@@ -81,14 +83,12 @@ export function emojitest(req, res, client) {
 }
 
 export function blobs(req, res, client) {
-  var cards = JSON.parse('../star-realms/cars.js');
-  cards.fir
+  var embeds;
+  cards.forEach(card => embeds.push(new MessageEmbed().setImage(card.url)))
+                
   return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          embeds: [
-            new MessageEmbed().setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/Mothership.png?v=1655926882042'),         
-            new MessageEmbed().setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/Battle%20Blob.png?v=1655926885644')
-        ]}        
+          embeds: embeds}        
       });
 }
