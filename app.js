@@ -16,7 +16,7 @@ import {
   EMOJITEST_COMMAND,
   HasGuildCommands,
 } from './commands.js'; 
-import { testHandle } from './handles.js';
+import * as handle from './handles.js';
 import { MessageEmbed, Client, Intents } from 'discord.js';
 //const { MessageEmbed } = require('discord.js');
 
@@ -30,7 +30,7 @@ app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 // Store for in-progress games. In production, you'd want to use a DB
-const activeGames = {};
+const game = {};
 
 /**
  * Interactions endpoint URL where Discord will send HTTP requests
@@ -43,7 +43,7 @@ app.post('/interactions', async function (req, res) {
    * Handle verification requests
    */
   if (type === InteractionType.PING) {
-    return res.send({ type: InteractionResponseType.PONG });
+    return handle.ping(req, res);
   }
 
   /**
@@ -55,60 +55,16 @@ app.post('/interactions', async function (req, res) {
 
     // "test" guild command
     if (name === 'test') {
-      return testHandle(req, res);
+      return handle.test(req, res);
     }
-    if (name === 'challenge' && id) {
-      const userId = req.body.member.user.id;
-      // User's object choice
-      const objectName = req.body.data.options[0].value;
-
-      // Create active game using message ID as the game ID
-      activeGames[id] = {
-        id: userId,
-        objectName,
-      };
-
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          // Fetches a random emoji to send from a helper function
-          content: `Rock papers scissors challenge from <@${userId}>`,
-          components: [
-            {
-              type: MessageComponentTypes.ACTION_ROW,
-              components: [
-                {
-                  type: MessageComponentTypes.BUTTON,
-                  // Append the game ID to use later on
-                  custom_id: `accept_button_${req.body.id}`,
-                  label: 'Accept',
-                  style: ButtonStyleTypes.PRIMARY,
-                },
-              ],
-            },
-          ],
-        },
-      });
+    if (name === 'challenge') { //OLD GAME DELETE LATER
+      return handle.challenge(req, res, game);
     }
     if(name === 'penis') {      
-      const exampleEmbed = new MessageEmbed()
-        .setImage('https://cdn.glitch.global/90bcdd4c-d30a-4fb8-89d2-11bb34f0fbde/penis.png?v=1655920368058');
-
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          embeds: [exampleEmbed]
-        },
-      });
+      return handle.penis(req, res);
     }
     if(name === 'emojitest') {
-      console.log(guild.emojis.cache)
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          content: 'hello world ' + client.emojis.cache.find(emoji => emoji.name === "Mothership").toString(),
-        },
-      });
+      return handle.emojitest(req, res);
     }
     if(name === 'blobs') {        
       return res.send({
